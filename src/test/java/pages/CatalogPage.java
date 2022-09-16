@@ -13,12 +13,12 @@ public class CatalogPage {
     private final By notePadsButton = By.xpath("//div[contains(@data-zone-data,'--noutbuki/')]");
 
     public void clickOnNotepads() {
-        WaitElement.untilAppearLongTime(driver, notePadsButton);
+        WaitElement.untilAppear(driver, notePadsButton);
         driver.findElement(notePadsButton).click();
     }
 
     public void moveToComputers() {
-        WaitElement.untilAppearLongTime(driver, computersButton);
+        WaitElement.untilAppear(driver, computersButton);
         actions.moveToElement(driver.findElement(computersButton)).build().perform();
     }
 }

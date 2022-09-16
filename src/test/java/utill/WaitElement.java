@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Objects;
 
 public class WaitElement {
-    public static void untilAppearLongTime(WebDriver driver, By element) {
+    public static void untilAppear(WebDriver driver, By element) {
         WebDriverWait wait = new WebDriverWait(driver
                 , Integer.parseInt(Objects.requireNonNull(JsonConfigParser.getConfig("waitLongTime"))));
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));

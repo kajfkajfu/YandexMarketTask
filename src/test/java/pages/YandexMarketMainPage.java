@@ -10,7 +10,7 @@ public class YandexMarketMainPage {
     private final By catalogButton = By.xpath("//button[@id='catalogPopupButton']");
 
     public void clickOnCatalog() {
-        WaitElement.untilAppearLongTime(driver, catalogButton);
+        WaitElement.untilAppear(driver, catalogButton);
         driver.findElement(catalogButton).click();
     }
 }

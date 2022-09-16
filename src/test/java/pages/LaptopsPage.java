@@ -7,6 +7,7 @@ import utill.DriverSingleTone;
 import utill.JsExecutor;
 import utill.StringParser;
 import utill.WaitElement;
+
 import java.util.List;
 
 public class LaptopsPage {
@@ -24,61 +25,52 @@ public class LaptopsPage {
     public boolean isPricesFromPageValid(String minPrice, String maxPrice) {
         int min = Integer.parseInt(minPrice);
         int max = Integer.parseInt(maxPrice);
-        WaitElement.untilAppearLongTime(driver, laptopsPrices);
+        WaitElement.untilAppear(driver, laptopsPrices);
         List<WebElement> laptops = driver.findElements(laptopsPrices);
-        for (WebElement laptop : laptops) {
-            if (StringParser.getPrice(laptop.getText()) < min || StringParser.getPrice(laptop.getText()) > max)
-                return false;
-        }
-        return true;
+        return laptops.stream().noneMatch(laptop -> StringParser.getPrice(laptop.getText()) < min
+                || StringParser.getPrice(laptop.getText()) > max);
     }
 
     public boolean isProducersFromPageValid(String producer) {
-        WaitElement.untilAppearLongTime(driver, laptopsProducers);
+        WaitElement.untilAppear(driver, laptopsProducers);
         List<WebElement> laptops = driver.findElements(laptopsProducers);
-        {
-            for (WebElement laptop : laptops) {
-                if (!laptop.getText().toLowerCase().contains(producer.toLowerCase()))
-                    return false;
-            }
-        }
-        return true;
-    }
+        return laptops.stream().allMatch(laptop -> laptop.getText().toLowerCase().contains(producer.toLowerCase()));
+}
 
     public void scroll() {
-        WaitElement.untilAppearLongTime(driver, infoAtTheBottomOfThePage);
+        WaitElement.untilAppear(driver, infoAtTheBottomOfThePage);
         WebElement element = driver.findElement(infoAtTheBottomOfThePage);
         JsExecutor.execute(driver, element);
     }
 
     public void clickOnShowButton() {
-        WaitElement.untilAppearLongTime(driver, showButton);
+        WaitElement.untilAppear(driver, showButton);
         driver.findElement(showButton).click();
     }
 
     public void clickOnProducer(String producer) {
         String locator = String.format(specifiedProducer, producer);
-        WaitElement.untilAppearLongTime(driver, By.xpath(locator));
+        WaitElement.untilAppear(driver, By.xpath(locator));
         driver.findElement(By.xpath(locator)).click();
     }
 
     public void findProducer(String producer) {
-        WaitElement.untilAppearLongTime(driver, findProducerField);
+        WaitElement.untilAppear(driver, findProducerField);
         driver.findElement(findProducerField).sendKeys(producer);
     }
 
     public void clickOnShowAllProducers() {
-        WaitElement.untilAppearLongTime(driver, showAllProducersButton);
+        WaitElement.untilAppear(driver, showAllProducersButton);
         driver.findElement(showAllProducersButton).click();
     }
 
     public void addMinPrice(String price) {
-        WaitElement.untilAppearLongTime(driver, minPriceField);
+        WaitElement.untilAppear(driver, minPriceField);
         driver.findElement(minPriceField).sendKeys(price);
     }
 
     public void addMaxPrice(String price) {
-        WaitElement.untilAppearLongTime(driver, maxPriceField);
+        WaitElement.untilAppear(driver, maxPriceField);
         driver.findElement(maxPriceField).sendKeys(price);
     }
 }
