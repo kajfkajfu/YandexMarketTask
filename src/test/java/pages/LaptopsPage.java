@@ -12,10 +12,10 @@ import java.util.List;
 
 public class LaptopsPage {
     private final WebDriver driver = DriverSingleTone.getDriver();
-    private final String specifiedProducer = "//span[@class='_2rlLb']/span[text()='%s']";
+    private final String specifiedProducer = "//label[@role='checkbox']//span[text()='%s']";
     private final By infoAtTheBottomOfThePage = By.xpath("//div[@data-grabber='SearchLegalInfo']");
-    private final By showButton = By.xpath("//span[@class='_20WYq _2WBB4']");
-    private final By findProducerField = By.xpath("//div[@data-filter-id='7893318']//input[@class='_3qxDp']");
+    private final By showButton = By.xpath("//div[@role='tooltip']//span[@role='button']");
+    private final By findProducerField = By.xpath("//div[@data-filter-id='7893318']//input[@type='text']");
     private final By showAllProducersButton = By.xpath("//div[@data-filter-id='7893318']//span[@data-tid='d78fd628']");
     private final By minPriceField = By.xpath("//div[@data-filter-id='glprice']//span[@data-auto='filter-range-min']//input");
     private final By maxPriceField = By.xpath("//div[@data-filter-id='glprice']//span[@data-auto='filter-range-max']//input");

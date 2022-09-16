@@ -24,6 +24,6 @@ public class BaseTest {
 
     @AfterMethod
     protected void afterTest() {
-        webDriver.quit();
+//        webDriver.quit();
     }
 }
